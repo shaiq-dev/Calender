@@ -3,14 +3,14 @@ Java Calender is a simple commandline calender tool.
 
 # Methods!
 To start first create an instance of the class
-```sh
+```java
 Calender cal = new Calander();
 ```
 
  # showMonth(int year, int month) 
   It displays the calender of the given month of the given year
   `returnType: void`
- ```sh
+ ```java
     cal.showMonth(2020,11);
     //Output
     November, 2020
@@ -24,13 +24,13 @@ Calender cal = new Calander();
  # showYear(int year)
  It displays the calender of the given year. 
  `returnType: void`
-  ```sh
+  ```java
     cal.showYear(2020);
   ```
 # dayOfMonth(int year, int month, int date)
 It returns the name of the day on the given date. 
 `returnType: String`
-```sh
+```java
     cal.dayOfMonth(2020,11,1);
     // Output
     Sunday
@@ -39,8 +39,8 @@ It returns the name of the day on the given date.
 # getNoOfDays(int year, int month)
 It returns the number of days in the given month.
 `@param: year` It is required to check if the year is a leap year or not.
-`returnType: String`
-```sh
+`returnType: int`
+```java
     cal.getNoOfDays(2020,11);
     // Output
     30
@@ -48,7 +48,7 @@ It returns the number of days in the given month.
 # isLeapYear(int year)
 It returns true if the year is a leap year else false. 
 `returnType: bool`
-```sh
+```java
     cal.isLeapYear(2020);
     // Output
     true
@@ -56,7 +56,7 @@ It returns true if the year is a leap year else false.
 # getCurrentYear()
 It returns the integer value of the current year. 
 `returnType: int`
-```sh
+```java
     cal.getCurrentYear();
     // Output
     2020
@@ -64,7 +64,7 @@ It returns the integer value of the current year.
 # getCurrentMonth()
 It returns the name of current month. 
 `returnType: String`
-```sh
+```java
     cal.getCurrentMonth();
     // Output
     November
@@ -73,12 +73,17 @@ It returns the name of current month.
 It returns the integer value of current month. 
 `returnType: int`
 `1 - January ... 12 - December`
-```sh
+```java
     cal.getCurrentMonthIndex();
     // Output
     11
 ```
 
+# showClock()
+It will display a digital clock. It uses Swing.
+```java
+    cal.showClock();
+```
 License
 ----
 

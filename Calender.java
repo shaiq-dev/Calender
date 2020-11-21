@@ -1,8 +1,13 @@
 package Calender;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.time.YearMonth;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 
@@ -101,6 +106,10 @@ public class Calender {
         return Months.get(getCurrentMonthIndex() - 1);
     }
 
+    public void showClock() {
+        SwingUtilities.invokeLater(() -> new clock());
+    }
+
 
 //    Utility Methods
     private void print(Object s) {
@@ -122,4 +131,61 @@ class InvalidYearException extends RuntimeException {
     }
 }
 
+// Clock
+class clock extends JFrame implements Runnable {
+    public clock() {
+        super("CLock");
+        Image icon = new BufferedImage(1,1,BufferedImage.TYPE_INT_ARGB_PRE);
+        setIconImage(icon);
+        setLayout(new BorderLayout());
+        setSize(new Dimension(AppSize));
+
+        timeThread = new Thread(this);
+        timeThread.start();
+
+        initComponents();
+        add(mainCompPanel, BorderLayout.CENTER);
+
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setVisible(true);
+    }
+
+    @Override
+    public void run() {
+        try {
+            while (true) {
+                SimpleDateFormat tFormat = new SimpleDateFormat("hh:mm:ss");
+                Date date = new Date();
+                timeLabel.setText(tFormat.format(date));
+                Thread.sleep(1000);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void initComponents() {
+        mainCompPanel = new JPanel();
+        mainCompPanel.setSize(AppSize);
+        mainCompPanel.setLayout(new GridBagLayout());
+        mainCompPanel.setBackground(Color.WHITE);
+        mainCompPanel.setBorder(BorderFactory.createMatteBorder(
+                1,0,0,0,new Color(0,0,0,90)));
+
+        timeLabel.setSize(150,80);
+        timeLabel.setForeground(new Color(0,0,0,150));
+        timeLabel.setFont(new Font("Arial", Font.BOLD, 40));
+        mainCompPanel.add(timeLabel);
+    }
+
+    private final Dimension AppSize = new Dimension(340,120);
+    private JPanel mainCompPanel;
+    private final JLabel timeLabel = new JLabel();
+
+    Thread timeThread;
+
+}
 
